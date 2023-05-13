@@ -1,13 +1,8 @@
-.App {
-    background-color: bisque;
-    height: 100vh;
-}
 
 html,
 body {
     height: 100vh;
 }
-
 .container {
     height: auto;
     width: 700px;
@@ -16,6 +11,8 @@ body {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    background-color: bisque;
+    height: 100vh;
 }
 
 .card {

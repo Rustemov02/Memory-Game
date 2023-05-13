@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react"
-import { Box, Typography } from '@mui/material'
 import css from '../images/css-3.png'
 import html from '../images/html-5.png'
 import js from '../images/js.png'
 import node from '../images/node-js.png'
 import Card from "./Card"
 
+import DialogSlide from '../components/Dialog'
 
  
 
@@ -22,15 +22,6 @@ function Cards() {
         { id: 4, img: node, stat: '' },
     ].sort(() => Math.random() - 0.5))
 
-    useEffect(() => {
-        const allCorrect = items.every(item => item.stat === 'correct');
-        if (allCorrect) {
-            setTimeout(() => {
-              alert('Congrats !')
-            }, 500);
-        }
-    }, [items]);
-
     const [prev, setPrev] = useState(-1) //previous
 
     function handleClick(id) {
@@ -44,11 +35,8 @@ function Cards() {
         }
     }
 
-    // birinci kartla ikinci kartin eyniliyini yoxla...(id-e gore)
     function check(current) {
-        const allCorrect = items.every(item => item.stat === 'correct');
-
-
+ 
         if (items[current].id === items[prev].id) {
             items[current].stat = 'correct';
             items[prev].stat = 'correct';
@@ -66,14 +54,29 @@ function Cards() {
         }
     }
 
+    {/*    Game Over Modal   */} 
 
+    useEffect(() => {
+        const allCorrect = items.every(item => item.stat === 'correct');
+        if (allCorrect) {   
+            setTimeout(() => { 
+            setShowDialog(true)
+            }, 500);
+        }
+    }, [items]);
 
+    const [showDialog , setShowDialog ] = useState(false)
+    
 
     return (
         <div className="container">
             {items.map((item, index) => (
                 <Card key={index} item={item} id={index} handleClick={handleClick} />
             ))}
+
+
+                {showDialog && <DialogSlide/>}
+                
         </div>
     )
 }
