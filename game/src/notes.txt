@@ -1,1 +1,59 @@
 1 => double click problem
+
+
+
+
+
+
+
+        // const handleClick = (id) => {
+        //     const resetClickedCard = () => setClickedCard([{ id: null }, { id: null }])
+
+        //     const openedCard = boxes.filter(item => item.id == id)
+        // if (clickedCard[0].id === null) {
+        //     openedCard[0].isFlipped = true
+        //     console.log(openedCard[0].isFlipped)
+
+        //     console.log('first click')
+        //     setClickedCard([
+        //         {
+        //             id: id,
+        //         },
+        //         {
+        //             id: null,
+        //         },
+        //     ]);
+
+        //     } else { 
+        //         console.log(id) 
+        //         console.log('second click')
+        //         setClickedCard(prevState => [
+        //             {
+        //                 id: prevState[0].id,
+        //             },
+        //             {
+        //                 id: id,
+        //             },
+        //         ]);
+        //         if (clickedCard[0].id === id) {
+        //             alert('Congratulations !')
+
+        //             resetClickedCard()
+        //         } else {
+        //             resetClickedCard()
+        //         }
+        //     }
+        //     console.log(boxes)
+        //     // const updatedBoxes = shuffledBoxes.map((box) => {
+        //     //     if (box.id === id) {
+        //     //         return {
+        //     //             ...box,
+        //     //             isFlipped: true
+        //     //         };
+        //     //     } else {
+        //     //         return box;
+        //     //     }
+        //     // });
+
+        //     // setShuffledBoxes(updatedBoxes);
+        // };

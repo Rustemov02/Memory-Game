@@ -1,10 +1,20 @@
 import React from 'react'
-import Box from './Box'
+import './index.css' 
+import Cards from './components/Cards';
+
 
 function App() {
   return (
-    <div className="App">
-          <Box/>
+    <div className="App"> 
+
+          <Cards/>
+        {/* <div className='container'>
+        </div> */}
+
+
+          {/* <Box/> */}
+          {/* <BoxDeneme/> */}
+
     </div>
   );
 }
