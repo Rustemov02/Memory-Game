@@ -1,22 +1,38 @@
-
-html,
-body {
-    height: 100vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 .container {
-    height: auto;
-    width: 700px;
+    border-radius: 5px;
+    width: 800px;
+    height: fit-content;
+    padding: 12px 10px;
     margin: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
     flex-wrap: wrap;
-    background-color: bisque;
-    height: 100vh;
+    background-color: #4f82b8;
+}
+
+input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #FFF;
+    width: 100%; 
+    font-family: 'Poppins';
+}
+
+.level_3 {
+    width: 1050px;
 }
 
 .card {
-    border: solid white 1px;
     width: 160px;
     height: 160px;
     margin: 5px;
