@@ -1,9 +1,7 @@
 import { Paper, Stack, Button } from '@mui/material'
 import React from 'react'
 
-
 export default function NonComplete(){
-
     const style = {
         padding : '12px 10px',
         display : 'flex',

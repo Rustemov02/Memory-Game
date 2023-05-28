@@ -36,6 +36,6 @@ const level_3_images = [
     { id: 11, img: pig, stat: '' },
     { id: 12, img: owl, stat: '' },
     { id: 12, img: owl, stat: '' },
-].sort(()=>Math.random() - 0.5)
+].sort(() => Math.random() - 0.5)
 
 export default level_3_images

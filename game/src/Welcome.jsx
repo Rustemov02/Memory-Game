@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Stack, Typography, Button, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { getUserName } from './Redux/store'
-import { useDispatch, useSelector } from 'react-redux'
 
 export default function Welcome() {
-    const dispatch = useDispatch()
-    const username = useSelector(state => state.game.username)
 
     const [value, setValue] = useState('')
-    const [active , setActive] = useState(true)
+    const [isActive, setIsActive] = useState(true)
     const styles = {
         cardStyle: {
             fontFamily: 'Poppins',
             fontWeight: 800,
             fontSize: "25px",
-            padding: '3px 30px',
-            color: 'white',
-            backgroundColor: "blue"
+            padding: '3px 30px'
         },
         inputBox: {
             padding: '18px',
@@ -29,13 +23,11 @@ export default function Welcome() {
     }
 
     useEffect(() => {
-        // console.log(username)
-        if(username < 2 || username.trim() === ''){
-            console.log('nulllll') 
-            setActive(true)
-        }else{
-            // console.log('looolll')
-            setActive(false)
+        if (value.trim() == '') {
+            setIsActive(true)
+        } else {
+            setIsActive(false)
+            localStorage.setItem('levelCount',1)
         }
     }, [value])
 
@@ -44,11 +36,12 @@ export default function Welcome() {
             <Typography style={{ fontFamily: 'Poppins', borderRadius: '2px', padding: '12px 10px', color: '#f8f9fa', fontSize: '35px' }}>Welcome Memory Card Game</Typography>
             <Box sx={styles.inputBox}>
                 <input type='text' name="user_name" placeholder="Username" className="input" value={value} onChange={(e) => {
-                    dispatch(getUserName(value))
-                    setValue(e.target.value)
+                    const inputValue = e.target.value
+                    localStorage.setItem('username', inputValue)
+                    setValue(inputValue)
                 }} />
             </Box>
-            <Button disabled={username == null ? true : false } style={styles.cardStyle} component={Link} to='level-1'>Start</Button>
+            <Button variant='contained' disabled={isActive} style={styles.cardStyle} component={Link} to='level-1'>Start</Button>
         </Stack>
     )
 }

@@ -25,7 +25,7 @@ const level_2_images = [
     { id: 7, img: man, stat: '' },
     { id: 8, img: groceries, stat: '' },
     { id: 8, img: groceries, stat: '' },
-].sort(()=>Math.random() - 0.5)
+].sort(() => Math.random() - 0.5)
 
 
 export default level_2_images

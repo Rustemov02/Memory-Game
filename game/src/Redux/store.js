@@ -12,18 +12,19 @@ export const gameSlice = createSlice({
     reducers : {
         getUserName : (state,{payload}) => {
             state.username = payload
-            // console.log(payload)
+            console.log(state.username)
         },
         nextLevel : (state , {payload}) => {
             state.levelCount = payload 
-            console.log(state.levelCount) 
         },
         increasaMove : state => {
             state.moves += 1
+        },
+        resetMoves : state => {
+            state.moves = 0
         }
     }
 })
 
-export const {nextLevel ,getUserName , increasaMove} = gameSlice.actions
-
+export const {nextLevel ,getUserName , increasaMove, resetMoves} = gameSlice.actions
 export default gameSlice.reducer 

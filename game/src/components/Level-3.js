@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from "react"
-import Card from "./Card"
-import DialogSlide from './Dialog'
-
-
+import Card from "./Card" 
 import images from '../components/Level3.data'
-import { useDispatch, useSelector } from "react-redux"
-import { nextLevel } from "../Redux/store"
+import { useDispatch } from "react-redux"
+import { resetMoves , increasaMove} from "../Redux/store"
 import Info from "./Info"
-import NonComplete from "./NonComplete"
+import Completed from "./Completed"
 
 
 function Level3() {
 
-    const dispatch = useDispatch()
-    const levelCount = useSelector(state => state.game.levelCount)
-
+    const dispatch = useDispatch() 
     const [items, setItems] = useState(images)
     const [prev, setPrev] = useState(-1) //previous
-
+    const [completed, setCompleted] = useState(false)
     function handleClick(id) {
         items[id].stat = 'active'
         setItems(items)
@@ -30,6 +25,8 @@ function Level3() {
     }
 
     function check(current) {
+
+        dispatch(increasaMove())
 
         if (items[current].id === items[prev].id) {
             items[current].stat = 'correct';
@@ -48,32 +45,30 @@ function Level3() {
         }
     }
 
-    {/*    Game Over Modal   */ }
+    useEffect(() => {
+        dispatch(resetMoves())
+    }, [])
 
+    {/*    Game Over Modal   */ }
     useEffect(() => {
         const allCorrect = items.every(item => item.stat === 'correct');
         if (allCorrect) {
             setTimeout(() => {
-                dispatch(nextLevel(4))
+                setCompleted(true)
                 setShowDialog(true)
             }, 500);
         }
     }, [items]);
 
     const [showDialog, setShowDialog] = useState(false)
-
-
     return (
         <>
-            {levelCount === 2 ? (
-                <div className="container">
-                    {items.map((item, index) => (
-                        <Card key={index} item={item} id={index} handleClick={handleClick} />
-                    ))}
-                    {showDialog && <DialogSlide />}
-                    <Info />
-                </div>
-            ) : <NonComplete />}
+            {!showDialog ? (<div className="container level_3">
+                {items.map((item, index) => (
+                    <Card key={index} item={item} id={index} handleClick={handleClick} />
+                ))}
+                <Info />
+            </div>) : (<Completed />)} 
         </>
     )
 }

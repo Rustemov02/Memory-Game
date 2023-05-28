@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import Card from "./Card"
 import DialogSlide from './Dialog'
 import { useDispatch, useSelector } from "react-redux"
-import { nextLevel } from "../Redux/store"
+import { increasaMove , resetMoves } from "../Redux/store"
 import Info from "./Info"
 import images from '../components/Level2.data'
 import NonComplete from "./NonComplete"
@@ -29,6 +29,8 @@ function Level2() {
 
     function check(current) {
 
+        dispatch(increasaMove())
+
         if (items[current].id === items[prev].id) {
             items[current].stat = 'correct';
             items[prev].stat = 'correct';
@@ -47,23 +49,24 @@ function Level2() {
     }
 
     {/*    Game Over Modal   */ }
+    useEffect(()=>{
+        dispatch(resetMoves())
+    },[])
 
     useEffect(() => {
         const allCorrect = items.every(item => item.stat === 'correct');
         if (allCorrect) {
+            localStorage.setItem('levelCount',3)
             setTimeout(() => {
-                dispatch(nextLevel(3))
                 setShowDialog(true)
             }, 500);
         }
     }, [items]);
-
     const [showDialog, setShowDialog] = useState(false)
-
 
     return (
         <>
-          {levelCount === 2 ? (
+          {levelCount < 3 ? (
             <div className="container">
               {items.map((item, index) => (
                 <Card key={index} item={item} id={index} handleClick={handleClick} />

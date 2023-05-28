@@ -1,21 +1,16 @@
 import { Stack, Typography, Button } from "@mui/material";
-import { useState } from "react";
-import { useSelector , useDispatch} from "react-redux";
-import { getUserName } from "../Redux/store";
+import { useSelector } from "react-redux";
 
 
 export default function Info() {
-    const dispatch = useDispatch()
-    const name = useSelector(state => state.game.username)
+    const name = localStorage.getItem('username')
+    const levelCount = localStorage.getItem('levelCount')
     const moves = useSelector(state => state.game.moves)
-    const levelCount = useSelector(state => state.game.levelCount)
-
-    const [prevName , setPrevName] = useState(name)
     const infoStyle = {
         width : '220px',
         position: 'absolute',
         right: 10,
-        top: 60, 
+        top: 10, 
         borderRadius : '5px',
         backgroundColor : '#4f82b8',
         padding : '12px 10px',
@@ -34,13 +29,18 @@ export default function Info() {
         }
     }
     return (
-        <Stack sx={infoStyle} border={1} direction='column'>
+        <Stack sx={infoStyle} border={1} direction='column' gap={1}>
+            <Typography fontFamily='Poppins' fontSize={30}>Level : {levelCount}</Typography>
             <Typography fontFamily='Poppins'>Name : {name}</Typography>
             <Typography fontFamily='Poppins'>Moves : {moves}</Typography>
-            <Typography fontFamily='Poppins'>Level : {levelCount}</Typography>
-            {/* <Stack direction='row' >  */}
-                <Button sx={customButton}>Menu</Button>
-            {/* </Stack> */}
+            <Stack direction='row' justifyContent='center'> 
+                <Button sx={customButton} onClick={()=>window.location.reload()}>Restart</Button>
+                <Button sx={customButton} onClick={()=>{
+                    window.location.href ='/'
+                    localStorage.setItem('levelCount',0)
+                    localStorage.setItem('username', null)
+                }}>Menu</Button> 
+            </Stack>
         </Stack>
     )
 }
